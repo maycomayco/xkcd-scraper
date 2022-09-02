@@ -9,6 +9,9 @@ const endTime = time();
 const XKCD_INITIAL_COMIC_ID = 2600;
 const XKCD_LATEST_COMIC_ID = 2665;
 
+// index file for algolia
+const indexFile = [];
+
 for (let index = XKCD_INITIAL_COMIC_ID; index < XKCD_LATEST_COMIC_ID; index++) {
   // get data from xkcd
   const url = `https://xkcd.com/${index}/info.0.json`;
@@ -29,11 +32,17 @@ for (let index = XKCD_INITIAL_COMIC_ID; index < XKCD_LATEST_COMIC_ID; index++) {
     ...restOfProperties,
   };
 
-  // save data
+  // write data
+  indexFile.push(comicToSave);
+
   const jsonFile = `./comics/${index}.json`;
   await fs.writeJSON(jsonFile, comicToSave);
   log(`Wrote ${jsonFile}! ✔\n`);
 }
+
+// write index file for algolia
+await fs.writeJSON("./comics/index.json", indexFile);
+log(`Wrote index content! ✔\n`);
 
 // cut the counter
 endTime();
