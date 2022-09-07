@@ -7,14 +7,14 @@ import { time, log } from "./log.js";
 const endTime = time();
 
 const XKCD_INITIAL_COMIC_ID = 2600;
-const XKCD_LATEST_COMIC_ID = 2665;
+const XKCD_LATEST_COMIC_ID = 2668;
 
 // index file for algolia
 const indexFile = [];
 
-for (let index = XKCD_INITIAL_COMIC_ID; index < XKCD_LATEST_COMIC_ID; index++) {
+for (let id = XKCD_INITIAL_COMIC_ID; id < XKCD_LATEST_COMIC_ID; id++) {
   // get data from xkcd
-  const url = `https://xkcd.com/${index}/info.0.json`;
+  const url = `https://xkcd.com/${id}/info.0.json`;
   log(`Getting data from ${url}`);
   const { data } = await axios.get(url);
 
@@ -25,7 +25,7 @@ for (let index = XKCD_INITIAL_COMIC_ID; index < XKCD_LATEST_COMIC_ID; index++) {
   const { height, width } = await getImageSize({ url: img });
   log(`Image dimensions: ${width}x${height}`);
   const comicToSave = {
-    index,
+    id,
     img,
     height,
     width,
@@ -35,13 +35,13 @@ for (let index = XKCD_INITIAL_COMIC_ID; index < XKCD_LATEST_COMIC_ID; index++) {
   // write data
   indexFile.push(comicToSave);
 
-  const jsonFile = `./comics/${index}.json`;
+  const jsonFile = `./comics/${id}.json`;
   await fs.writeJSON(jsonFile, comicToSave);
   log(`Wrote ${jsonFile}! ✔\n`);
 }
 
 // write index file for algolia
-await fs.writeJSON("./comics/index.json", indexFile);
+await fs.writeJSON("./index/index.json", indexFile);
 log(`Wrote index content! ✔\n`);
 
 // cut the counter
