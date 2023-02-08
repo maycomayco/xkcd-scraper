@@ -6,8 +6,8 @@ import { time, log } from "./log.js";
 // start timer
 const endTime = time();
 
-const XKCD_INITIAL_COMIC_ID = 2600;
-const XKCD_LATEST_COMIC_ID = 2668;
+const XKCD_INITIAL_COMIC_ID = 2700;
+const XKCD_LATEST_COMIC_ID = 2735;
 
 // index file for algolia
 const indexFile = [];
