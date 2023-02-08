@@ -1,0 +1,26 @@
+name: Scrape website
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+# el trabajo que queremos que haga
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: -- Checkout code
+        uses: actions/checkout@v3
+      - name: -- Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+      - name: -- Go to scraper folder, install dependencies and run scraper
+        run: |
+          cd scraper
+          npm i
+          npm run scrape
