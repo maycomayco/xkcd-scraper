@@ -19,8 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.12.1
-      - name: -- Go to scraper folder, install dependencies and run scraper
+      - name: -- install dependencies and run scraper
         run: |
-          cd scraper
           npm i
           npm run scrape
