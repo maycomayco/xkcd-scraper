@@ -1,6 +1,6 @@
 # xkcd Scraper
 
-A web scraper for xkcd.com, a comic website. This scraper extracts each comic in JSON format, including its ID, image URL, link, title, and alt text. It also aggregates the data from all scraped comics into a single JSON file for indexing in Algolia, which is used as a frontend service.
+A web scraper for xkcd.com, a comic website. This scraper extracts each comic in JSON format, including its ID, image URL, link, title, and alt text. It only considers comics with an ID of 2700 or higher. The scraper also aggregates the data from all scraped comics into a single JSON file for manual loading into Algolia, which is used as a frontend service.
 
 ## Usage
 
